@@ -33,7 +33,7 @@ class CreateFilmJob implements ShouldQueue
 
     /**
      * Обработка задачи по созданию фильма.
-     *
+     * @psalm-api
      * @param MovieFinder $movieFinder Сервис для работы с удаленной базой фильмов.
      * @param FilmService $filmService Сервис для работы с фильмами.
      * @return void

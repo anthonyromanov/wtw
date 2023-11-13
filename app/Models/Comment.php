@@ -38,11 +38,11 @@ class Comment extends Model
      */
     protected $appends = [
         'author_name',
-    ];   
-        
+    ];
+
     /**
      * Отношение "один ко многим" к модели User.
-     *
+     * @psalm-api
      * @return BelongsTo
      */
     public function user(): BelongsTo
@@ -52,7 +52,7 @@ class Comment extends Model
 
     /**
      * Отношение "один ко многим" к модели Film.
-     *
+     * @psalm-api
      * @return BelongsTo
      */
     public function film(): BelongsTo
@@ -62,7 +62,7 @@ class Comment extends Model
 
     /**
      * Отношение "многие к одному" к модели Comment (родительский комментарий).
-     *
+     * @psalm-api
      * @return BelongsTo
      */
     public function parent(): BelongsTo
@@ -92,7 +92,7 @@ class Comment extends Model
 
     /**
      * Получает имя автора комментария.
-     *
+     * @psalm-api
      * @return string
      */
     protected function getAuthorNameAttribute(): string

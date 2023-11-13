@@ -8,10 +8,13 @@ use Illuminate\Database\Seeder;
 
 class StarFilmSeeder extends Seeder
 {
+/**
+ * @psalm-api
+ */
     public function run(): void
     {
         $films = Film::all();
-        $actors = Star::all();
+        $stars = Star::all();
 
         $films->each(function (Film $film) use ($stars) {
             $randomStars = $stars->random(rand(1, 10));

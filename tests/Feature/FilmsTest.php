@@ -1,11 +1,12 @@
 <?php
+
 namespace Tests\Feature;
 
 use App\Jobs\CreateFilmJob;
 use App\Models\Film;
 use App\Models\Genre;
 use App\Models\User;
-use App\Services\MovieService\MovieService;
+use App\Services\MovieFinder\MovieFinder;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Queue;
 use Mockery;
@@ -164,20 +165,45 @@ class FilmsTest extends TestCase
         ]);
     }
 
-    public function testStoreModerator()
+    /**
+     * Тестирование метода store для модератора.
+     */
+    public function testStoreModerator(): void
     {
         $user = User::factory()->create([
             'role' => User::ROLE_MODERATOR,
         ]);
 
+        $imdbId = 'tt3896198';
+
         $data = [
-            'imdb_id' => 'tt3896198',
+            'imdb_id' => $imdbId,
         ];
-        
+
+        $newMovie = Film::factory()->make([
+            'imdb_id' => $imdbId,
+        ])->toArray();
+
+        Queue::fake();
+
+        $movieFinder = Mockery::mock(MovieFinder::class);
+        $movieFinder->shouldReceive('getMovie')
+            ->with($imdbId)
+            ->andReturn($newMovie);
+        $this->app->instance(MovieFinder::class, $movieFinder);
+
         $response = $this->actingAs($user)->postJson("/api/films", $data);
+
         $response->assertStatus(Response::HTTP_CREATED);
-        $response->assertJsonStructure([
-            'data' => $this->getTypicalFilmStructure(),
+        $response->assertJson([
+            'data' => [
+                'imdb_id' => $imdbId,
+                'status' => Film::STATUS_PENDING,
+            ],
+        ]);
+        $this->assertDatabaseHas('films', [
+            'imdb_id' => $imdbId,
+            'status' => Film::STATUS_PENDING,
         ]);
     }
 
@@ -266,6 +292,5 @@ class FilmsTest extends TestCase
             'data' => $this->getTypicalFilmStructure(),
         ]);
         $response->assertJsonMissing(['data' => ['is_favorite']]);
-    }   
+    }
 }
-

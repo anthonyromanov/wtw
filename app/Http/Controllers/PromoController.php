@@ -8,6 +8,9 @@ use App\Models\Film;
 use App\Models\Promo;
 use Illuminate\Http\Request;
 
+/**
+ * @psalm-api
+ */
 class PromoController extends Controller
 {
     /**
@@ -23,10 +26,12 @@ class PromoController extends Controller
 
     /**
      * Установка нового промо ролика.
+     * @param Request $_request
+     * @param Film $film
      *
      * @return Base
      */
-    public function store(Request $request, Film $film): Base
+    public function store(Request $_request, Film $film): Base
     {
         $promo = Promo::create(['film_id' => $film->id]);
         return new Success($promo);

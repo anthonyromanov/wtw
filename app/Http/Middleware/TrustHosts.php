@@ -4,6 +4,9 @@ namespace App\Http\Middleware;
 
 use Illuminate\Http\Middleware\TrustHosts as Middleware;
 
+/**
+ * @psalm-api
+ */
 class TrustHosts extends Middleware
 {
     /**

@@ -10,7 +10,7 @@ class StoreFilmRequest extends FormRequest
 {
     /**
      * Определяет, авторизован ли пользователь для выполнения запроса.
-     *
+     * @psalm-api
      * @return bool Разрешение на выполнение запроса.
      */
     public function authorize()
@@ -20,7 +20,7 @@ class StoreFilmRequest extends FormRequest
 
     /**
      * Возвращает правила валидации для запроса.
-     *
+     * @psalm-api
      * @return array Правила валидации.
      */
     public function rules()

@@ -18,7 +18,7 @@ class StarService
     {
         $film->stars()->detach();
         foreach ($starsNames as $starsName) {
-            $star = Star::firstOrCreate(['name' => $starName]);
+            $star = Star::firstOrCreate(['name' => $starsName]);
             $film->stars()->attach($star);
         }
     }

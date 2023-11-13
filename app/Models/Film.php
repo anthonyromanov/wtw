@@ -148,8 +148,8 @@ class Film extends Model
 
     /**
      * Сохраняет рейтинг фильма
-     *
      * @param  float  $rating
+     *
      * @return void
      */
     public function saveRating(float $rating): void
@@ -160,7 +160,7 @@ class Film extends Model
 
     /**
      * Получает список актеров фильма
-     *
+     * @psalm-api
      * @return array
      */
     public function getStarringAttribute(): array
@@ -170,7 +170,7 @@ class Film extends Model
 
     /**
      * Получает список жанров фильма
-     *
+     * @psalm-api
      * @return array
      */
     public function getGenreAttribute(): array
@@ -180,7 +180,7 @@ class Film extends Model
 
     /**
      * Проверяет, добавлен ли фильм в Избранное текущим пользователем
-     *
+     * @psalm-api
      * @return bool
      */
     public function getIsFavoriteAttribute(): bool

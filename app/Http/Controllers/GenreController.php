@@ -7,6 +7,9 @@ use App\Http\Responses\Base;
 use App\Http\Responses\Success;
 use App\Models\Genre;
 
+/**
+ * @psalm-api
+ */
 class GenreController extends Controller
 {
     /**
@@ -22,6 +25,8 @@ class GenreController extends Controller
 
     /**
      * Редактирование жанра.
+     * @param GenreRequest $request
+     * @param Genre $genre
      *
      * @return Base
      */

@@ -13,21 +13,27 @@ class AcademyRepository implements RemoteRepositoryInterface
     private string $baseUrl;
     private int $cachingTime;
 
+     /**
+     * Конструктор класса AcademyRepository.
+     * @psalm-api
+     * @return array|null Данные фильма в виде массива или null, если фильм не найден.
+     */
     public function __construct()
     {
         $this->baseUrl = config('custom.academy.base_url');
-        $this->cachingTime = (int)config('custom.academy.caching_time');
+        /** @psalm-suppress InvalidCast */
+        $this->cachingTime = intval(config('custom.academy.caching_time'));
     }
 
     /**
      * Находит фильм по его IMDB ID.
-     *
-     * @param string $movieId IMDB ID фильма.
+     * * @psalm-api
+     * @param string $imdbId IMDB ID фильма.
      * @return array|null Данные фильма в виде массива или null, если фильм не найден.
      */
     public function find(string $imdbId): ?array
     {
-        $cacheKey = 'movie_'.$imdbId;
+        $cacheKey = 'movie_' . $imdbId;
 
         if (Cache::has($cacheKey)) {
             return Cache::get($cacheKey);

@@ -21,10 +21,10 @@ class Genre extends Model
 
     /**
      * Показывает фильмы, которым присвоен жанр
-     *
+     * @psalm-api
      * @return BelongsToMany
      */
-    public function films():BelongsToMany
+    public function films(): BelongsToMany
     {
         return $this->belongsToMany(Film::class, 'film_genre', 'genre_id', 'film_id');
     }

@@ -5,6 +5,10 @@ namespace Database\Factories;
 use App\Models\Film;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
+/**
+ * @psalm-api
+ * @template-extends Factory<Film>
+ */
 class FilmFactory extends Factory
 {
     protected $model = Film::class;

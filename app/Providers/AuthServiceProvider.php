@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Providers;
 
 use App\Models\User;
@@ -7,6 +8,9 @@ use App\Models\Comment;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 
+/**
+ * @psalm-api
+ */
 class AuthServiceProvider extends ServiceProvider
 {
     /**

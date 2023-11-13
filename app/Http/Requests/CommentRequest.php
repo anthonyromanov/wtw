@@ -8,7 +8,7 @@ class CommentRequest extends FormRequest
 {
     /**
      * Определяет, авторизован ли пользователь для выполнения запроса.
-     *
+     * @psalm-api
      * @return bool Разрешение на выполнение запроса.
      */
     public function authorize()
@@ -18,7 +18,7 @@ class CommentRequest extends FormRequest
 
     /**
      * Возвращает правила валидации для запроса.
-     *
+     * @psalm-api
      * @return array Правила валидации.
      */
     public function rules(): array

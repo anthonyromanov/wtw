@@ -8,7 +8,7 @@ class FilmService
 {
     /**
      * Конструктор класса FilmService.
-     *
+     * @psalm-api
      * @param StarService $starService Сервис для работы с актерами.
      * @param GenreService $genreService Сервис для работы с жанрами.
      */
@@ -20,7 +20,7 @@ class FilmService
 
     /**
      * Создает фильм на основе данных.
-     *
+     * @psalm-api
      * @param array $data Данные фильма.
      * @param string $nextStatus Следующий статус фильма.
      * @return Film Созданный фильм.
@@ -40,7 +40,8 @@ class FilmService
      *
      * @param array $data Данные фильма.
      * @param string $nextStatus Следующий статус фильма.
-     * @return Film|null Обновленный фильм или null, если фильм не найден.
+     * @psalm-suppress PossiblyUnusedReturnValue
+     * @return Film $film|null Обновленный фильм или null, если фильм не найден.
      */
     public function updateFromData(array $data, string $nextStatus): ?Film
     {

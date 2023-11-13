@@ -20,6 +20,9 @@ class UpdateCommentsForFilmJob implements ShouldQueue
 
     /**
      * Конструктор класса UpdateCommentsForFilmJob.
+     * @param Film $film
+     * @param array $newComments
+     *
      */
     public function __construct(protected Film $film, protected array $newComments)
     {
@@ -27,7 +30,7 @@ class UpdateCommentsForFilmJob implements ShouldQueue
 
     /**
      * Обработка задачи по обновлению комментариев для фильма.
-     *
+     * @psalm-api
      * @return void
      */
     public function handle(): void

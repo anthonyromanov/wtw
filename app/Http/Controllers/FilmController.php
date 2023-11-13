@@ -11,22 +11,25 @@ use App\Http\Responses\SuccessPagination;
 use App\Http\Responses\Success;
 use App\Jobs\CreateFilmJob;
 use App\Models\Film;
-use App\Services\ActorService;
+use App\Services\StarService;
 use App\Services\GenreService;
 use Illuminate\Support\Facades\Gate;
 use Symfony\Component\HttpFoundation\Response;
 
+/**
+ * @psalm-api
+ */
 class FilmController extends Controller
 {
     /**
      * Получение списка фильмов.
+     * @param FilmRequest $request
      *
      * @return Base
      */
     public function index(FilmRequest $request): Base
     {
         $pageCount = config('custom.films_per_page');
-        $page = $request->query('page');
         $genre = $request->query('genre');
         $status = $request->query('status', Film::STATUS_READY);
         $order_by = $request->query('order_by', Film::ORDER_BY_RELEASED);
@@ -35,7 +38,7 @@ class FilmController extends Controller
         if (Gate::denies('view-films-with-status', $status)) {
             return new Fail("Недостаточно прав для просмотра фильмов в статусе $status", Response::HTTP_FORBIDDEN);
         }
-
+        /** @psalm-suppress TooManyArguments */
         $films = Film::query()
             ->select('id', 'name', 'preview_image', 'released', 'rating')
             ->when($genre, function ($query, $genre) {
@@ -52,6 +55,7 @@ class FilmController extends Controller
 
     /**
      * Добавление фильма в базу данных.
+     * @param StoreFilmRequest $request
      *
      * @return Base
      */
@@ -72,6 +76,7 @@ class FilmController extends Controller
 
     /**
      * Получение информации о фильме.
+     * @param Film $film
      *
      * @return Base
      */
@@ -82,6 +87,8 @@ class FilmController extends Controller
 
     /**
      * Редактирование фильма.
+     * @param UpdateFilmRequest $request
+     * @param Film $film
      *
      * @return Base
      */
@@ -90,7 +97,7 @@ class FilmController extends Controller
         $film->update($request->validated());
 
         if ($request->has('starring')) {
-            app(ActorService::class)->syncStars($film, $request->input('starring'));
+            app(StarService::class)->syncStars($film, $request->input('starring'));
         }
 
         if ($request->has('genre')) {

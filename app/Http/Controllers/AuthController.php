@@ -10,16 +10,20 @@ use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Symfony\Component\HttpFoundation\Response;
 
+/**
+ * @psalm-api
+ */
 class AuthController extends Controller
 {
     /**
      * Выполняет авторизацию пользователя в сервисе.
+     * @param LoginRequest $request
      *
      * @return Base
      */
     public function login(LoginRequest $request): Base
     {
-        if (!Auth::guard('web')->attempt($request->validated())) {
+        if (!Auth::statefulGuard('user')->attempt($request->validated())) {
             return new Fail(trans('auth.failed'), Response::HTTP_UNAUTHORIZED);
         }
 

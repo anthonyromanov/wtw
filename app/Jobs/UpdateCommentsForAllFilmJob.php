@@ -19,7 +19,8 @@ class UpdateCommentsForAllFilmJob implements ShouldQueue
 
     /**
      * Обработка задачи по обновлению комментариев для всех фильмов.
-     *
+     * @param AcademyRepository $repository
+     * @psalm-api
      * @return void
      */
     public function handle(AcademyRepository $repository)

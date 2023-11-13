@@ -5,8 +5,14 @@ namespace Database\Seeders;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
+/**
+ * @psalm-api
+ */
 class DatabaseSeeder extends Seeder
 {
+/**
+ * @psalm-api
+ */
     public function run(): void
     {
         $this->call([

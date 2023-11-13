@@ -8,12 +8,15 @@ use App\Http\Responses\Success;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 
+/**
+ * @psalm-api
+ */
 class RegisterController extends Controller
 {
     /**
      * Выполняет регистрацию пользователя в сервисе.
+     * @param RegisterRequest $request
      *
-     * @param RegisterRequest $request.
      * @return Base
      */
     public function register(RegisterRequest $request): Base

@@ -10,6 +10,9 @@ use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Symfony\Component\HttpFoundation\Response;
 
+/**
+ * @psalm-api
+ */
 class FavoriteController extends Controller
 {
     /**
@@ -28,6 +31,7 @@ class FavoriteController extends Controller
 
     /**
      * Добавление фильма в избранное.
+     * @param Film $film
      *
      * @return Base
      */
@@ -47,6 +51,7 @@ class FavoriteController extends Controller
 
     /**
      * Удаление фильма из избранного.
+     * @param Film $film
      *
      * @return Base
      */

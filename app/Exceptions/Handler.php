@@ -12,6 +12,9 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Throwable;
 
+/**
+ * @psalm-api
+ */
 class Handler extends ExceptionHandler
 {
     /**
@@ -48,8 +51,7 @@ class Handler extends ExceptionHandler
      */
     public function register(): void
     {
-        $this->reportable(function (Throwable $e) {
-            //
+        $this->reportable(function (Throwable $_e) {
         });
     }
 
@@ -62,17 +64,17 @@ class Handler extends ExceptionHandler
         : redirect()->guest($exception->redirectTo() ?? route('login'));
     }
 
-    public function render($request, Throwable $exception)
+    public function render($request, Throwable $e)
     {
         if ($request->expectsJson()) {
-            if ($exception instanceof NotFoundHttpException || $exception instanceof ModelNotFoundException) {
+            if ($e instanceof NotFoundHttpException || $e instanceof ModelNotFoundException) {
                 return response()->json([
                     'message' => 'Запрашиваемая страница не существует.',
                 ], Response::HTTP_NOT_FOUND);
             }
 
-            if ($exception instanceof ValidationException) {
-                $errors = $exception->errors();
+            if ($e instanceof ValidationException) {
+                $errors = $e->errors();
                 $response = [
                     'message' => 'Переданные данные не корректны.',
                     'errors' => $errors,
@@ -81,11 +83,12 @@ class Handler extends ExceptionHandler
             }
         }
 
-        return parent::render($request, $exception);
+        return parent::render($request, $e);
     }
 
     protected function prepareJsonResponse($request, Throwable $e): JsonResponse
     {
-        return (new Fail($e->getMessage(), $e->getCode() ?: Response::HTTP_INTERNAL_SERVER_ERROR, $e))->toResponse($request);
+        return (new Fail($e->getMessage(), (int)$e->getCode() ?: Response::HTTP_INTERNAL_SERVER_ERROR, $e))
+            ->toResponse($request);
     }
 }

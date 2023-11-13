@@ -8,7 +8,7 @@ class RegisterRequest extends FormRequest
 {
     /**
      * Определяет, авторизован ли пользователь для выполнения запроса.
-     *
+     * @psalm-api
      * @return bool Разрешение на выполнение запроса.
      */
     public function authorize(): bool
@@ -18,7 +18,7 @@ class RegisterRequest extends FormRequest
 
     /**
      * Возвращает правила валидации для запроса.
-     *
+     * @psalm-api
      * @return array Правила валидации.
      */
     public function rules(): array

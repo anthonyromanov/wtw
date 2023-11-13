@@ -5,6 +5,10 @@ namespace Database\Factories;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
+/**
+ * @psalm-api
+ * @template-extends Factory<User>
+ */
 class UserFactory extends Factory
 {
     protected $model = User::class;

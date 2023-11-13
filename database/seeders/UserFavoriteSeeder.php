@@ -8,6 +8,9 @@ use Illuminate\Database\Seeder;
 
 class UserFavoriteSeeder extends Seeder
 {
+/**
+ * @psalm-api
+ */
     public function run(): void
     {
         $users = User::all();

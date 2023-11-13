@@ -21,7 +21,7 @@ class Star extends Model
 
     /**
      * Отношение "многие ко многим" к модели Film.
-     *
+     * @psalm-api
      * @return BelongsToMany
      */
     public function films(): BelongsToMany

@@ -54,7 +54,7 @@ class User extends Model implements Authenticatable
 
     /**
      * Показывает комментарии пользователя
-     *
+     * @psalm-api
      * @return HasMany
      */
     public function comments(): HasMany
@@ -74,6 +74,7 @@ class User extends Model implements Authenticatable
 
     /**
      * Проверяет добавлен ли фильм в Изранное у пользователя
+     * @param int $filmId
      *
      * @return bool
      */

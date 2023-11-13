@@ -11,7 +11,6 @@ class Fail extends Base
 
     /**
      * Конструктор класса Fail.
-     *
      * @param string|null $errorMessage Сообщение об ошибке.
      * @param int|null $statusCode Код состояния HTTP.
      * @param Throwable|null $exception Исключение.
@@ -23,7 +22,7 @@ class Fail extends Base
     ) {
         if ($exception) {
             $this->errorMessage = $errorMessage ?? $exception->getMessage();
-            $statusCode = $statusCode ?? ($exception->getCode() ?: Response::HTTP_INTERNAL_SERVER_ERROR);
+            $statusCode = $statusCode ?? ((int)$exception->getCode() ?: Response::HTTP_INTERNAL_SERVER_ERROR);
         } else {
             $this->errorMessage = $errorMessage ?? 'Ошибка в теле запроса';
             $statusCode = $statusCode ?? Response::HTTP_BAD_REQUEST;

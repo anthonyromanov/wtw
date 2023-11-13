@@ -7,6 +7,9 @@ use App\Services\MovieFinder;
 use GuzzleHttp\Client;
 use Illuminate\Support\Facades\Cache;
 
+/**
+ * @psalm-api
+ */
 class OmdbRepository implements RemoteRepositoryInterface
 {
     private Client $client;
@@ -24,7 +27,7 @@ class OmdbRepository implements RemoteRepositoryInterface
         $this->client = $client;
         $this->apiKey = config('custom.omdb.api_key');
         $this->baseUrl = config('custom.omdb.base_url');
-        $this->cachingTime = (int)config('custom.omdb.caching_time');
+        $this->cachingTime = config('custom.omdb.caching_time');
     }
 
     /**
@@ -33,9 +36,9 @@ class OmdbRepository implements RemoteRepositoryInterface
      * @param string $imdbId IMDB ID фильма.
      * @return array|null Данные фильма в виде массива или null, если фильм не найден.
      */
-    public function getMovie(string $imdbId): ?array
+    public function find(string $imdbId): ?array
     {
-        $cacheKey = 'movie_'.$imdbId;
+        $cacheKey = 'movie_' . $imdbId;
 
         if (Cache::has($cacheKey)) {
             return Cache::get($cacheKey);

@@ -8,7 +8,7 @@ class GenreRequest extends FormRequest
 {
     /**
      * Определяет, авторизован ли пользователь для выполнения запроса.
-     *
+     * @psalm-api
      * @return bool Разрешение на выполнение запроса.
      */
     public function authorize(): bool
@@ -18,7 +18,7 @@ class GenreRequest extends FormRequest
 
     /**
      * Возвращает атрибуты для сообщений об ошибках валидации.
-     *
+     * @psalm-api
      * @return array Атрибуты для сообщений об ошибках.
      */
     public function attributes(): array
@@ -30,7 +30,7 @@ class GenreRequest extends FormRequest
 
     /**
      * Возвращает правила валидации для запроса.
-     *
+     * @psalm-api
      * @return array Правила валидации.
      */
     public function rules(): array

@@ -23,7 +23,7 @@ class Promo extends Model
 
     /**
      * Показывает промо к фильму
-     *
+     * @psalm-api
      * @return BelongsTo
      */
     public function film(): BelongsTo

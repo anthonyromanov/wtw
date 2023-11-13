@@ -120,5 +120,4 @@ class SimilarFilmsTest extends TestCase
         $this->assertEquals($similarFilm2->id, $similarFilms[1]['id']);
         $this->assertEquals($similarFilm3->id, $similarFilms[0]['id']);
     }
-
 }

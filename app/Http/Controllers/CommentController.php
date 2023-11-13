@@ -14,10 +14,14 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Gate;
 use Symfony\Component\HttpFoundation\Response;
 
+/**
+ * @psalm-api
+ */
 class CommentController extends Controller
 {
     /**
      * Получение отзывов к фильму.
+     * @param Film $film
      *
      * @return Base
      */
@@ -29,6 +33,8 @@ class CommentController extends Controller
 
     /**
      * Добавление отзыва к фильму.
+     * @param CommentRequest $request
+     * @param Film $film
      *
      * @return Base
      */
@@ -51,6 +57,8 @@ class CommentController extends Controller
 
     /**
      * Редактирование отзыва к фильму.
+     * @param CommentRequest $request
+     * @param Comment $comment
      *
      * @return Base
      */
@@ -73,10 +81,12 @@ class CommentController extends Controller
 
     /**
      * Удаление отзыва к фильму.
+     * @param Request $_request
+     * @param Comment $comment
      *
      * @return Base
      */
-    public function destroy(Request $request, Comment $comment): Base
+    public function destroy(Request $_request, Comment $comment): Base
     {
         if (Gate::denies('comment-delete', $comment)) {
             return new Fail('Недостаточно прав.', Response::HTTP_FORBIDDEN);

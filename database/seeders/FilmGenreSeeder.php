@@ -8,6 +8,9 @@ use Illuminate\Database\Seeder;
 
 class FilmGenreSeeder extends Seeder
 {
+/**
+ * @psalm-api
+ */
     public function run(): void
     {
         $films = Film::all();

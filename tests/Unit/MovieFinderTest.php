@@ -28,8 +28,8 @@ class MovieFinderTest extends TestCase
         $mockMovieRepository->shouldReceive('find')
             ->with($imdbId)
             ->once()
-            ->andReturn($newMovie);      
- 
+            ->andReturn($newMovie);
+
         $movieFinder = new MovieFinder($mockMovieRepository);
 
         $result = $movieFinder->getMovie($imdbId);

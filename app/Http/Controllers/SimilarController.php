@@ -7,12 +7,15 @@ use App\Http\Responses\Success;
 use App\Models\Film;
 use Symfony\Component\HttpFoundation\Response;
 
+/**
+ * @psalm-api
+ */
 class SimilarController extends Controller
 {
     /**
      * Получение списка фильмов, похожих на данный.
+     * @param Film $film
      *
-     * @param Film $film.
      * @return Base
      */
     public function index(Film $film): Base

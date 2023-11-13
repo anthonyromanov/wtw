@@ -7,6 +7,10 @@ use App\Models\Film;
 use App\Models\Comment;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
+/**
+ * @psalm-api
+ * @template-extends Factory<Comment>
+ */
 class CommentFactory extends Factory
 {
     protected $model = Comment::class;

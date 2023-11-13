@@ -10,6 +10,9 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
 
+/**
+ * @psalm-api
+ */
 class UserController extends Controller
 {
     /**
@@ -27,6 +30,7 @@ class UserController extends Controller
 
     /**
      * Обновление данных о пользователе.
+     * @param UpdateUserRequest $request
      *
      * @return Base
      */

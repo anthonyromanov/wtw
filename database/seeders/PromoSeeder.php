@@ -7,6 +7,9 @@ use Illuminate\Database\Seeder;
 
 class PromoSeeder extends Seeder
 {
+/**
+ * @psalm-api
+ */
     public function run(): void
     {
         Promo::factory()->count(10)->create();

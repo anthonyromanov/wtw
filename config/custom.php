@@ -1,4 +1,5 @@
 <?php
+
 return [
     'api_key' => env('api_key'),
     'films_per_page' => env('films_per_page'),
